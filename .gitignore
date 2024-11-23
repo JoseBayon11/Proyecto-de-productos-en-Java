@@ -1,0 +1,7 @@
+build/
+lib/
+test/
+nbproject/
+build.xml
+manifest.mf
+.DS_Store
