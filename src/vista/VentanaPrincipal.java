@@ -257,7 +257,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         modelo.addColumn("Categoria");
     }
 
-    //Metodo para las que los bontones creen acciones 
+    //Metodo para que los bontones creen acciones 
     public void setActionListener(ControladorPrograma listener) {
         btnInsertar.addActionListener(listener);
         btnActualizar.addActionListener(listener);
@@ -267,7 +267,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     //Metodo basado en la clase Producto. Declaro 4 variables y las igualo a los objetos instancidos del producto
     public Producto obtenerProducto() {
-        String idTexto = tfid.getText().trim();
+        String idTexto = tfid.getText().trim(); //Trim para ignorar espacios en blanco
         String nombre = tfNombre.getText().trim();
         String precioTexto = tfPrecio.getText().trim();
         String categoria = tfCategoria.getText().trim();
