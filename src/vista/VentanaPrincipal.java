@@ -257,7 +257,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         modelo.addColumn("Categoria");
     }
 
-    //Metodo para que los bontones creen acciones 
+    //Metodo para que los botones creen acciones 
     public void setActionListener(ControladorPrograma listener) {
         btnInsertar.addActionListener(listener);
         btnActualizar.addActionListener(listener);
