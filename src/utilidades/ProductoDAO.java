@@ -93,7 +93,7 @@ public class ProductoDAO {
 
     //Metodo para buscar por nombre
     public ArrayList<Producto> buscarPorNombreProducto(String nombreProducto, Connection conn) {
-        String sqlBuscar = "SELECT * FROM productos WHERE nombre LIKE ('%',?,'%')";
+        String sqlBuscar = "SELECT * FROM productos WHERE nombre LIKE CONCAT('%',?,'%')";
         ArrayList<Producto> listaProducto = new ArrayList<>();
         
         PreparedStatement ps;
