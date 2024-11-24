@@ -69,15 +69,52 @@ public class ControladorPrograma implements ActionListener {//implementa ActionL
                 break;
 
             case "Actualizar":
-                System.out.println("ACtualizar");
+                //1. Limpiamos la tabla antes de mostrar nada
+                ventanaPrincipal.limpiarDatosTabla();
+                //2. Abrimos la conexion
+                conn = Conexion.obtenerConexion();
+                //3. Obtenemos el producto para actualizar
+                producto = ventanaPrincipal.obtenerProducto();
+                //4. Actualizamos el producto
+                productoDAO.actualizarProductos(producto, conn);
+                //5. Obtenemos los productos para mostrarlos en la lista
+                listaProducto = productoDAO.buscarTodosLosProductos(conn);
+                //6. Cargamos la lista de los productos en la tabla
+                ventanaPrincipal.cargarDatosTabla(listaProducto);
+                //7. Cerramos la conexion
+                Conexion.cerrarConexion(conn);
                 break;
 
             case "Eliminar":
-                System.out.println("Eliminar");
+                //1. Limpiamos la tabla antes de mostrar nada
+                ventanaPrincipal.limpiarDatosTabla();
+                //2. Abrimos la conexion
+                conn = Conexion.obtenerConexion();
+                //3. Obtenemos el producto para borrar
+                producto = ventanaPrincipal.obtenerProducto();
+                //4. Eliminamos el producto
+                productoDAO.eliminarProductos(producto, conn);
+                //5. Obtenemos los productos para mostrarlos en la lista
+                listaProducto = productoDAO.buscarTodosLosProductos(conn);
+                //6. Cargamos la lista de los productos en la tabla
+                ventanaPrincipal.cargarDatosTabla(listaProducto);
+                //7. Cerramos la conexion
+                Conexion.cerrarConexion(conn);
                 break;
                 
                 case "Buscar":
-                System.out.println("Buscar");
+                //1. Limpiamos la tabla antes de mostrar nada
+                ventanaPrincipal.limpiarDatosTabla();
+                //2. Abrimos la conexion
+                conn = Conexion.obtenerConexion();
+                //3. Obtenemos el nombre del produco
+                String nombreProducto = ventanaPrincipal.obtenerNombreProductoBuscar();
+                //4. Buscamos el producto segun el nombre
+                listaProducto = productoDAO.buscarPorNombreProducto(nombreProducto, conn);
+                //5. Cargamos la lista de los productos en la tabla
+                ventanaPrincipal.cargarDatosTabla(listaProducto);
+                //6. Cerramos la conexion
+                Conexion.cerrarConexion(conn);
                 break;
             default:
                 throw new AssertionError();

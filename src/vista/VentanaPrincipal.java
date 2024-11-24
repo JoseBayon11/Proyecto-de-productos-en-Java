@@ -5,6 +5,8 @@
 package vista;
 
 import controlador.ControladorPrograma;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utilidades.Producto;
@@ -243,12 +245,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField tfid;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    
-    
     //------------ METODOS -------------
-    
     //Metodo para configurar la tabla (las columnas)
     private void configurarTabla() {
         modelo.addColumn("id");
@@ -263,6 +260,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnActualizar.addActionListener(listener);
         btnEliminar.addActionListener(listener);
         btnBuscar.addActionListener(listener);
+        
+        setMouseListener();
+        
+    }
+    
+    
+    //Metodo para seleccionar los datos de la tabla y que los cargue en pantalla 
+    private void setMouseListener () {
+        tablaProducto.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               int filaSeleccionada = tablaProducto.rowAtPoint(e.getPoint());
+               
+               //Verificamos si se ha hecho click con el btn izquierdo y se ha seleccionado una fila valida
+               if (e.getButton() == MouseEvent.BUTTON1 && filaSeleccionada != -1) {
+
+                   //Obtenemos el valor de la fila seleccionada y la columna 0 que corresponde al id
+                   tfid.setText(tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 0).toString());
+                   
+                   //Obtenemos el valor de la fila seleccionada y la columna 0 que corresponde al id
+                   tfNombre.setText(tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 1).toString());
+                   
+                   //Obtenemos el valor de la fila seleccionada y la columna 0 que corresponde al id
+                   tfPrecio.setText(tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 2).toString());
+                   
+                   //Obtenemos el valor de la fila seleccionada y la columna 0 que corresponde al id
+                   tfCategoria.setText(tablaProducto.getValueAt(tablaProducto.getSelectedRow(), 3).toString());
+               }
+            }
+            
+        });
     }
 
     //Metodo basado en la clase Producto. Declaro 4 variables y las igualo a los objetos instancidos del producto
@@ -282,7 +310,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 System.out.println("El id no es numero valido" + idTexto);
                 return null;
             }
-            
+
         }
 
         if (!precioTexto.isEmpty()) {
@@ -303,6 +331,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     //Cargar datos en la tabla
     public void cargarDatosTabla(ArrayList<Producto> listaProducto) {
+
+        if (listaProducto == null || listaProducto.isEmpty()) {
+            System.out.println("La lista de productos está vacía o es nula.");
+            return;
+        }
+
         for (Producto producto : listaProducto) {
             Object[] fila = new Object[]{producto.getId(),
                 producto.getNombre(),
